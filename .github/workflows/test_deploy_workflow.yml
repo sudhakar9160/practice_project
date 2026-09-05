@@ -20,10 +20,10 @@ jobs:
     needs: get_code_and_install
     runs-on: ubuntu-latest
     steps:
-      - name: run lin test
-        run: lint test
+      - name: run lint test
+        run: npm run lint
       - name: run npm test
-        run: npm test
+        run: npm run test
   bild_deployment:
     needs: run_tests
     runs-on: ubuntu-latest
