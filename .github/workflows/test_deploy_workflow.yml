@@ -33,6 +33,10 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
+      - name: get code
+        uses: actions/checkout@v4
+      - name: install dependies
+        run: npm ci
       - name: build
         run: npm run build
       - name: deployment
