@@ -3,36 +3,37 @@ on:
   push:
     branches:
       - main
-
 jobs:
-  get_code_and_install:
+  run_lint:
     runs-on: ubuntu-latest
     steps:
       - name: get code
         uses: actions/checkout@v3
-      - name: install nodejs
+      - name: install npm
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          npm-version: 20
       - name: install dependencies
         run: npm ci
-  run_tests:
-    needs: get_code_and_install
-    runs-on: ubuntu-latest
-    steps:
-      - name: run lint test
+      - name: npm_run
         run: npm run lint
-      - name: run npm test
-        run: npm run test
-  bild_deployment:
-    needs: run_tests
+  run_test:
     runs-on: ubuntu-latest
     steps:
-      - name: build npm
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install npm
+        uses: actions/setup-node@v4
+        with:
+          npm-version: 20
+      - name: install dependencies
+        uses: npm ci
+      - name: run test
+        run: npm run test
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: build
         run: npm run build
       - name: deployment
-        run: echo "deploying the build as per build"
-
-
-
-  
+        run: echo "deployment..."
