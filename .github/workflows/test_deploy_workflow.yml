@@ -12,7 +12,7 @@ jobs:
       - name: install npm
         uses: actions/setup-node@v4
         with:
-          npm-version: 20
+          node-version: 20
       - name: install dependencies
         run: npm ci
       - name: npm_run
@@ -25,7 +25,7 @@ jobs:
       - name: install npm
         uses: actions/setup-node@v4
         with:
-          npm-version: 20
+          node-version: 20
       - name: install dependencies
         uses: npm ci
       - name: run test
