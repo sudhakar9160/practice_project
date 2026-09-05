@@ -1,0 +1,38 @@
+name: test_deployment
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  get_code_and_install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code
+        uses: actions/checkout@v3
+      - name: install nodejs
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: install dependencies
+        run: npm ci
+  run_tests:
+    needs: get_code_and_install
+    runs-on: ubuntu-latest
+    steps:
+      - name: run lin test
+        run: lint test
+      - name: run npm test
+        run: npm test
+  bild_deployment:
+    needs: run_tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: build npm
+        run: npm run build
+      - name: deployment
+        run: echo "deploying the build as per build"
+
+
+
+  

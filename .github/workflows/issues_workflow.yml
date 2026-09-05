@@ -1,0 +1,8 @@
+name: issues_workflow
+on: issues
+jobs:
+  output_event_details:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get object info
+        run: echo "toJSON(github)"
